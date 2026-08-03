@@ -1,4 +1,4 @@
-name: Build Android APK
+name: Build Android Release
 
 on:
   push:
@@ -11,35 +11,49 @@ permissions:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
         with:
           node-version: 24
           cache: npm
 
-      - run: npm ci
+      - name: Install dependencies
+        run: npm ci
 
-      - uses: actions/setup-java@v4
+      - name: Setup Java
+        uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: 21
 
-      - run: npx cap sync android
+      - name: Create keystore
+        run: |
+          echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 --decode > android/app/prayertracker-release-key.jks
 
-      - name: Build APK
+      - name: Create keystore properties
+        run: |
+          echo "storeFile=prayertracker-release-key.jks" > android/keystore.properties
+          echo "storePassword=${{ secrets.KEYSTORE_PASSWORD }}" >> android/keystore.properties
+          echo "keyAlias=${{ secrets.KEY_ALIAS }}" >> android/keystore.properties
+          echo "keyPassword=${{ secrets.KEY_PASSWORD }}" >> android/keystore.properties
+
+      - name: Capacitor Sync
+        run: npx cap sync android
+
+      - name: Build Release AAB
         run: |
           cd android
           chmod +x gradlew
-          ./gradlew assembleDebug
+          ./gradlew bundleRelease
 
-      - name: Release
-        uses: softprops/action-gh-release@v2
+      - name: Upload AAB
+        uses: actions/upload-artifact@v4
         with:
-          tag_name: latest
-          name: Latest APK
-          files: android/app/build/outputs/apk/debug/app-debug.apk
+          name: prayertracker-release
+          path: android/app/build/outputs/bundle/release/app-release.aab
