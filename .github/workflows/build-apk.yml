@@ -47,15 +47,15 @@ jobs:
         run: npx cap sync android
 
       - name: Build Release APK and AAB
-  run: |
-    cd android
-    chmod +x gradlew
-    ./gradlew assembleRelease bundleRelease
+        run: |
+          cd android
+          chmod +x gradlew
+          ./gradlew assembleRelease bundleRelease
 
       - name: Upload APK and AAB
-  uses: actions/upload-artifact@v4
-  with:
-    name: prayertracker-release-files
-    path: |
-      android/app/build/outputs/apk/release/app-release.apk
-      android/app/build/outputs/bundle/release/app-release.aab
+        uses: actions/upload-artifact@v4
+        with:
+          name: prayertracker-release-files
+          path: |
+            android/app/build/outputs/apk/release/app-release.apk
+            android/app/build/outputs/bundle/release/app-release.aab
