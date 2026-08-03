@@ -128,11 +128,9 @@ header p {
 }
 
 .circle svg {
-  width: 190px;
-
-  height: 190px;
-
-  transform: rotate(-90deg);
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
 }
 
 .bg {
@@ -601,23 +599,22 @@ footer button:hover {
   }
 
   .scoreCard {
-    padding: 25px;
+    padding: 20px;
   }
 
   .circle {
     width: 160px;
-
     height: 160px;
   }
 
   .circle svg {
-    width: 160px;
-
-    height: 160px;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
   }
 
   .scoreText span {
-    font-size: 42px;
+    font-size: 40px;
   }
 
   .dateCard {
@@ -626,21 +623,17 @@ footer button:hover {
 
   .dateCard button {
     width: 46px;
-
     height: 46px;
   }
 
   .prayerCard {
     flex-wrap: wrap;
-
     gap: 15px;
   }
 
   .icon {
     width: 52px;
-
     height: 52px;
-
     font-size: 24px;
   }
 
@@ -656,33 +649,27 @@ footer button:hover {
     bottom: 8px;
   }
 }
-
-@media (max-width: 450px) {
-  .stats {
-    grid-template-columns: 1fr;
-  }
-
-  .challengeHeader {
-    flex-direction: column;
-
-    gap: 10px;
-  }
-
-  .dateCard {
-    flex-direction: column;
-
-    gap: 18px;
-  }
-
-  .dateCard button {
-    width: 100%;
-
-    border-radius: 14px;
-  }
+.dateInfo {
+  width: 100%;
 }
 
-.hidden {
-  display: none;
+.dateButtons {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  align-items: center;
+}
+
+.dateButtons button {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+}
+
+#todayButtonCard {
+  width: auto;
+  padding: 0 18px;
+  border-radius: 14px;
 }
 
 /* Calendar */
@@ -972,4 +959,98 @@ button.dangerButton:hover {
 .calendarHeader button:hover {
   background: #ef233c;
   transform: translateY(-2px);
+}
+
+@media (max-width: 650px) {
+  .dateCard {
+    flex-direction: column;
+    gap: 15px;
+    text-align: center;
+  }
+
+  .dateButtons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+  }
+
+  .dateButtons button {
+    width: 45px;
+    height: 45px;
+  }
+
+  #todayButtonCard {
+    width: auto;
+    min-width: 90px;
+    height: 45px;
+    border-radius: 14px;
+  }
+}
+
+.dateCard {
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  gap: 12px;
+
+  text-align: center;
+}
+
+.dateButtons {
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  gap: 12px;
+
+  width: 100%;
+}
+.dateButtons button {
+  width: 56px;
+
+  height: 56px;
+
+  border-radius: 16px;
+
+  border: none;
+
+  cursor: pointer;
+
+  font-size: 22px;
+}
+#todayBtn {
+  width: auto;
+
+  min-width: 100px;
+
+  padding: 0 18px;
+
+  font-size: 16px;
+
+  font-weight: 700;
+}
+
+@media (max-width: 600px) {
+  .dateButtons {
+    gap: 8px;
+  }
+
+  .dateButtons button {
+    width: 48px;
+    height: 48px;
+    font-size: 20px;
+  }
+
+  #todayBtn {
+    min-width: 80px;
+    height: 48px;
+  }
 }

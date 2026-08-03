@@ -608,6 +608,11 @@ function calculateTodayScore() {
   return score;
 }
 
+document.getElementById("todayBtn").onclick = () => {
+  currentDate = getTodayString();
+  render();
+};
+
 //==========================================
 // بروزرسانی امتیاز
 //==========================================
@@ -619,7 +624,7 @@ function updateScore() {
 
   const circle = document.getElementById("progressCircle");
 
-  const circumference = 471;
+  const circumference = 440;
 
   circle.style.strokeDashoffset = circumference - (circumference * score) / 100;
 
