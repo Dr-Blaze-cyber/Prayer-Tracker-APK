@@ -619,17 +619,15 @@ document.getElementById("todayBtn").onclick = () => {
 
 function updateScore() {
   const score = calculateTodayScore();
-
   document.getElementById("score").textContent = score;
 
   const circle = document.getElementById("progressCircle");
 
-  const circumference = 440;
-
+  // اصلاح محیط دایره برای همگام‌سازی با CSS
+  const circumference = 471;
   circle.style.strokeDashoffset = circumference - (circumference * score) / 100;
 
   const message = document.getElementById("scoreMessage");
-
   if (score === 100) {
     message.textContent = "🌟 روزت کامل شد";
   } else if (score === 80) {
@@ -775,10 +773,6 @@ function openCalendarDay(day) {
     behavior: "smooth",
   });
 }
-
-//==========================================
-// ریستارت
-//==========================================
 
 //==========================================
 // ریستارت
