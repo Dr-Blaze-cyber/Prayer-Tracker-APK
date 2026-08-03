@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>نمازبان</title>
+
+    <link rel="stylesheet" href="style.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <div id="modal" class="modal hidden">
+    <div class="modalBox">
+      <div id="modalIcon">✅</div>
+      <h3 id="modalTitle">موفق</h3>
+      <p id="modalText"></p>
+
+      <div id="modalButtons">
+        <button id="modalConfirm">تأیید</button>
+        <button id="modalCancel">لغو</button>
+      </div>
+    </div>
+  </div>
+
+  <body>
+    <div class="container">
+      <section id="mainPage">
+        <!-- ================= HEADER ================= -->
+
+        <header>
+          <h1>🕌 نمازبان</h1>
+
+          <p>رهگیری نمازهای روزانه</p>
+        </header>
+
+        <!-- ================= SCORE ================= -->
+
+        <section class="scoreCard">
+          <div class="circle">
+            <svg>
+              <circle class="bg" cx="90" cy="90" r="75"></circle>
+
+              <circle
+                id="progressCircle"
+                class="progress"
+                cx="90"
+                cy="90"
+                r="75"
+              ></circle>
+            </svg>
+
+            <div class="scoreText">
+              <span id="score">100</span>
+
+              <small>از 100</small>
+            </div>
+          </div>
+
+          <h2 id="scoreMessage">عالی جلو می‌ری</h2>
+        </section>
+
+        <!-- ================= CHALLENGE ================= -->
+
+        <section class="challengeCard">
+          <div class="challengeHeader">
+            <span>هدف</span>
+
+            <span id="challengeDay"> روز ۱ از ۴۰ </span>
+          </div>
+
+          <div class="progressBar">
+            <div id="challengeProgress"></div>
+          </div>
+        </section>
+
+        <!-- ================= DATE ================= -->
+
+        <section class="dateCard">
+          <button id="prevDay">❮</button>
+
+          <div>
+            <h2 id="todayText">امروز</h2>
+
+            <div id="currentDate">۱۴۰۵/۰۵/۱۲</div>
+
+            <small id="lastSave"> آخرین ذخیره: -- </small>
+          </div>
+
+          <button id="nextDay">❯</button>
+        </section>
+
+        <!-- ================= PRAYERS ================= -->
+
+        <section class="prayers">
+          <div class="prayerCard" data-prayer="fajr">
+            <div class="icon">🌅</div>
+
+            <div class="info">
+              <h3>صبح</h3>
+
+              <p>Fajr</p>
+            </div>
+
+            <button class="status pending">خوانده نشده</button>
+          </div>
+
+          <div class="prayerCard" data-prayer="dhuhr">
+            <div class="icon">☀️</div>
+
+            <div class="info">
+              <h3>ظهر</h3>
+
+              <p>Dhuhr</p>
+            </div>
+
+            <button class="status pending">خوانده نشده</button>
+          </div>
+
+          <div class="prayerCard" data-prayer="asr">
+            <div class="icon">🌤️</div>
+
+            <div class="info">
+              <h3>عصر</h3>
+
+              <p>Asr</p>
+            </div>
+
+            <button class="status pending">خوانده نشده</button>
+          </div>
+
+          <div class="prayerCard" data-prayer="maghrib">
+            <div class="icon">🌇</div>
+
+            <div class="info">
+              <h3>مغرب</h3>
+
+              <p>Maghrib</p>
+            </div>
+
+            <button class="status pending">خوانده نشده</button>
+          </div>
+
+          <div class="prayerCard" data-prayer="isha">
+            <div class="icon">🌙</div>
+
+            <div class="info">
+              <h3>عشاء</h3>
+
+              <p>Isha</p>
+            </div>
+
+            <button class="status pending">خوانده نشده</button>
+          </div>
+        </section>
+
+        <!-- ================= QUICK STATS ================= -->
+
+        <section class="stats">
+          <div class="stat">
+            <div class="number" id="doneCount">0</div>
+
+            <div>تعداد نماز خوانده شده</div>
+          </div>
+
+          <div class="stat">
+            <div class="number" id="missedCount">0</div>
+
+            <div>تعداد نماز قضا خوانده شده</div>
+          </div>
+
+          <div class="stat">
+            <div class="number" id="totalCount">0</div>
+
+            <div>کل</div>
+          </div>
+
+          <div class="stat">
+            <div class="number" id="percent">0%</div>
+
+            <div>موفقیت</div>
+          </div>
+        </section>
+
+        <!-- ================= CHARTS ================= -->
+        <section class="achievement">
+          <h2>جزئیات نمازها</h2>
+
+          <div id="prayerAchievement"></div>
+        </section>
+      </section>
+      <!-- Calendar Page -->
+
+      <section id="calendarPage" class="hidden">
+        <h2>📅 تقویم</h2>
+        <div class="calendarHeader">
+          <button id="prevMonth">❮</button>
+
+          <button id="currentMonth">امروز</button>
+
+          <h2 id="calendarTitle"></h2>
+
+          <button id="nextMonth">❯</button>
+        </div>
+
+        <div id="calendarGrid"></div>
+      </section>
+
+      <!-- Settings Page -->
+
+      <section id="settingsPage" class="hidden">
+        <h2>⚙ تنظیمات</h2>
+
+        <label> تعداد روز هدف </label>
+
+        <input id="challengeInput" type="number" value="40" />
+
+        <button id="saveSettings">ذخیره</button>
+
+        <button id="resetAll" class="dangerButton">شروع مجدد برنامه</button>
+      </section>
+
+      <!-- ================= FOOTER ================= -->
+
+      <footer>
+        <button id="todayButton">امروز</button>
+
+        <button id="calendarButton">📅 تقویم</button>
+
+        <button id="settingButton">⚙ تنظیمات</button>
+      </footer>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/jalaali-js/dist/jalaali.min.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
